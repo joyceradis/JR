@@ -1,21 +1,33 @@
 # Security Policy
 
-## Supported Versions
+## Scope
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+This repository is a public portfolio and development surface. Public visibility must never be treated as authorization to expose secrets, patient data, judicial documents, private Google Drive content or production credentials.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+## Secrets
 
-## Reporting a Vulnerability
+Never commit or expose in client-side bundles:
 
-Use this section to tell people how to report a vulnerability.
+- `GEMINI_API_KEY` or other AI-provider secrets;
+- OAuth client secrets;
+- service-account credentials;
+- refresh/access tokens;
+- webhook secrets;
+- database service-role keys;
+- private signing keys.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+AI-provider calls that require a secret key must be proxied through server-side routes. Client code must not receive the secret.
+
+Firebase web configuration is client configuration rather than a server secret, but the associated project and API key must still be restricted in Google Cloud/Firebase to the minimum required APIs, origins and quotas.
+
+## Personal and clinical data
+
+Do not place real patient identifiers, medical records, judicial records, attachments, access tokens or private workspace content in this repository, tests, fixtures or screenshots.
+
+## Reporting
+
+Do not publish exploit details or sensitive data in public issues. Use a private contact channel controlled by the repository owner.
+
+## Production gate
+
+Before any production use involving real users or protected data, require authentication/authorization review, least-privilege scopes, server-side secret handling, input validation, logging without sensitive payloads, rate limiting, dependency review, backup/restore testing and an incident-response process.
