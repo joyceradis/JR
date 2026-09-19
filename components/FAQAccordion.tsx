@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronDown, Sparkles, Scale, ShieldCheck, FileText, Activity } from 'lucide-react';
+import { ChevronDown, Scale, ShieldCheck, FileText, Activity } from 'lucide-react';
 
 interface FAQItemProps {
   question: string;
   answer: string;
-  category: 'pericia' | 'longevidade' | 'seguranca';
+  category: 'pericia' | 'clinica' | 'seguranca';
   icon: React.ReactNode;
 }
 
@@ -13,46 +13,40 @@ const FAQ_ITEMS: FAQItemProps[] = [
   {
     category: 'pericia',
     icon: <Scale size={16} className="text-[#B5A475]" />,
-    question: "O que é a Assistência Técnica Médica e como ela diferencia-se da Perícia Judicial?",
-    answer: "A Perícia Judicial é conduzida pelo perito nomeado pelo juiz, agindo como um agente imparcial da justiça. A Assistência Técnica, por outro lado, é contratada pela própria parte (por intermédio de seu advogado) para garantir a paridade de armas técnica. Nós estruturamos a estratégia médica do processo: elaboramos quesitos científicos perspicazes, acompanhamos fisicamente o exame pericial judicial para garantir a boa técnica e emitimos um Parecer Técnico Médico irrefutável, blindando ou impugnando o laudo judicial com absoluto rigor científico."
+    question: "Qual é a diferença entre perícia judicial e assistência técnica médica?",
+    answer: "O perito judicial é nomeado pelo juízo e deve atuar com imparcialidade dentro do objeto definido no processo. O assistente técnico é indicado por uma das partes. São funções diferentes, com responsabilidades e limites próprios."
   },
   {
     category: 'pericia',
     icon: <FileText size={16} className="text-[#B5A475]" />,
-    question: "Como o Parecer Médico de Alto Valor aumenta a chance de concessão de benefícios previdenciários e assistenciais?",
-    answer: "Bancas de advocacia previdenciária enfrentam alta taxa de indeferimento de novos benefícios por incapacidade e BPC devido a laudos superficiais do INSS. Entregamos um Parecer de alto valor científico baseado no nexo documental. Traduzimos termos clínicos complexos para o código processual civil, correlacionando diagnósticos e exames retrospectivos a limitações funcionais biológicas específicas do trabalhador. Desenvolvemos quesitos personalizados que impedem que o perito oficial dê respostas genéricas ou monossilábicas (como 'sim' ou 'não')."
+    question: "O que é necessário para uma análise médico-legal inicial?",
+    answer: "O ponto de partida é definir o objeto da análise e identificar quais documentos realmente respondem à pergunta técnica. Prontuários, exames, laudos anteriores, quesitos e cronologia podem ser relevantes, mas a necessidade de cada item depende do caso."
   },
   {
-    category: 'pericia',
-    icon: <ShieldCheck size={16} className="text-[#B5A475]" />,
-    question: "De que maneira a análise documental médica atesta o direito de Isenção de IRPF por moléstia grave?",
-    answer: "A isenção do Imposto de Renda (IRPF) para aposentados e pensionistas que sofrem de doenças graves exige comprovação documental retrospectiva irrefutável. Analisamos detalhadamente todo o histórico clínico do cliente (prontuários, laudos de cirurgias, exames laboratoriais e anatomopatológicos) para reconstruir uma linha do tempo clínica incontestável. Produzimos laudos minuciosos que atestam a existência e a data de eclosão da patologia em estrito alinhamento com os critérios legais e jurisprudenciais vigentes."
-  },
-  {
-    category: 'longevidade',
-    icon: <Sparkles size={16} className="text-[#B5A475]" />,
-    question: "Por que focar em Longevidade Celular e Ativa e não em abordagens paliativas genéricas?",
-    answer: "Enquanto a medicina convencional costuma atuar de maneira reativa apenas tratando o sintoma de patologias já manifestadas, a medicina focada em Longevidade Celular e Ativa atua na raiz metabólica celular e mitocondrial. Analisamos biomarcadores funcionais de alta sensibilidade para identificar disfunções subclínicas muito antes da manifestação de doenças. Estruturamos planos metabólicos contínuos com foco em nutracêutica avançada, epigenética e modulação ativa de biomotores para assegurar mais 'Healthspan' — tempo de vida produtivo, vigoroso e saudável."
-  },
-  {
-    category: 'longevidade',
+    category: 'clinica',
     icon: <Activity size={16} className="text-[#B5A475]" />,
-    question: "Como funciona a primeira avaliação de Longevidade Celular?",
-    answer: "É um processo elegante com alto rigor diagnóstico. Iniciamos com uma consulta preliminar minuciosa para compreender seu histórico pessoal de bio-performance, fadiga crônica, sono e metabolismo. Com base nisso, solicitamos exames laboratoriais especializados. Na avaliação de retorno, desenhamos seu Protocolo de Otimização Celular Personalizado, englobando cronobiologia alimentar, planos de suplementação celular ativa e acompanhamento clínico contínuo para aferir a evolução de cada marcador."
+    question: "Como funciona uma consulta médica?",
+    answer: "A consulta parte da história clínica, antecedentes, medicamentos, exame físico quando aplicável e documentos disponíveis. Conduta, necessidade de investigação e seguimento dependem da avaliação individual, sem pacotes ou promessas de resultado."
   },
   {
     category: 'seguranca',
     icon: <ShieldCheck size={16} className="text-[#B5A475]" />,
-    question: "Como as informações médicas e processos dos clientes são protegidos na plataforma?",
-    answer: "A confidencialidade é tratada como prioridade jurídica e ética máxima. Nosso sistema é integrado ao Google Cloud e à LGPD através de criptografia total ponta-a-ponta. Os advogados e pacientes têm acesso ao 'Drive Cabinet' integrado diretamente ao Google Drive institucional seguro. Todos os prontuários, documentos processuais anexados e dados pessoais coletados permanecem em repositórios controlados por tokens biométricos de segurança."
+    question: "Posso enviar dados médicos ou documentos judiciais por qualquer área deste site?",
+    answer: "Não. A versão pública do site não deve ser usada para publicar ou compartilhar dados sensíveis sem um canal previamente autorizado. Documentos clínicos e judiciais exigem tratamento compatível com sigilo profissional e proteção de dados."
+  },
+  {
+    category: 'seguranca',
+    icon: <ShieldCheck size={16} className="text-[#B5A475]" />,
+    question: "As ferramentas digitais substituem avaliação médica ou conclusão pericial?",
+    answer: "Não. Ferramentas digitais podem organizar informações, cálculos e fluxos, mas a interpretação e a conclusão dependem de contexto, documentação, método e julgamento profissional."
   }
 ];
 
 export const FAQAccordion: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [activeCategory, setActiveCategory] = useState<'all' | 'pericia' | 'longevidade'>('all');
+  const [activeCategory, setActiveCategory] = useState<'all' | 'pericia' | 'clinica'>('all');
 
-  const filteredItems = FAQ_ITEMS.filter(item => 
+  const filteredItems = FAQ_ITEMS.filter(item =>
     activeCategory === 'all' ? true : item.category === activeCategory
   );
 
@@ -63,26 +57,23 @@ export const FAQAccordion: React.FC = () => {
   return (
     <section className="bg-stone-50/50 dark:bg-stone-950/20 border-t border-stone-200/50 dark:border-stone-900/60 py-20 px-6 transition-colors duration-300">
       <div className="max-w-4xl mx-auto space-y-12">
-        
-        {/* Header Block */}
         <div className="text-center space-y-3">
           <span className="text-[10px] uppercase font-mono tracking-widest bg-[#B5A475]/10 dark:bg-[#B5A475]/5 text-[#B5A475] px-4 py-1.5 rounded-full border border-[#B5A475]/15 font-bold inline-flex items-center gap-2">
-            <ShieldCheck size={12} /> Esclarecimentos e Rigor Técnico
+            <ShieldCheck size={12} /> Informações profissionais
           </span>
           <h2 className="font-serif text-3xl md:text-4xl text-stone-900 dark:text-stone-50 font-normal tracking-tight">
-            Perguntas Frequentes
+            Perguntas frequentes
           </h2>
           <p className="text-stone-500 dark:text-stone-400 text-xs max-w-lg mx-auto leading-relaxed">
-            Consulte respostas claras sobre os pilares da Assistência Técnica Médico-Forense e as consultas de Longevidade Celular e Estilo de Vida Ativo.
+            Informações gerais sobre atendimento médico, perícia e uso responsável das ferramentas digitais.
           </p>
         </div>
 
-        {/* Tab Filter Button Row */}
         <div className="flex justify-center gap-2 max-w-md mx-auto p-1 bg-stone-100 dark:bg-stone-900/40 rounded-xl border border-stone-200/40 dark:border-stone-850">
           {[
             { id: 'all', label: 'Todos' },
-            { id: 'pericia', label: 'Perícias & Assistência' },
-            { id: 'longevidade', label: 'Longevidade Celular' }
+            { id: 'pericia', label: 'Perícia' },
+            { id: 'clinica', label: 'Clínica' }
           ].map((cat) => (
             <button
               key={cat.id}
@@ -91,7 +82,7 @@ export const FAQAccordion: React.FC = () => {
                 setOpenIndex(null);
               }}
               className={`flex-1 py-1.5 px-3 text-[10px] font-extrabold uppercase tracking-wider rounded-lg transition-all cursor-pointer ${
-                activeCategory === cat.id 
+                activeCategory === cat.id
                   ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-white shadow-sm font-black'
                   : 'text-stone-550 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white'
               }`}
@@ -101,11 +92,9 @@ export const FAQAccordion: React.FC = () => {
           ))}
         </div>
 
-        {/* Accordion List */}
         <div className="space-y-4">
           <AnimatePresence initial={false}>
             {filteredItems.map((item, idx) => {
-              const isFirst = idx === 0;
               const isOpen = openIndex === idx;
               return (
                 <motion.div
@@ -114,25 +103,24 @@ export const FAQAccordion: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
                   className={`bg-white dark:bg-stone-900/60 border rounded-2xl transition-all duration-300 overflow-hidden ${
-                    isOpen 
-                      ? 'border-[#B5A475]/40 shadow-md ring-1 ring-[#B5A475]/10' 
+                    isOpen
+                      ? 'border-[#B5A475]/40 shadow-md ring-1 ring-[#B5A475]/10'
                       : 'border-stone-200/60 dark:border-stone-850 hover:border-stone-300 dark:hover:border-stone-800'
                   }`}
                 >
-                  {/* Collapsed Header */}
                   <button
                     onClick={() => toggleItem(idx)}
                     className="w-full flex items-center justify-between p-5 md:p-6 text-left cursor-pointer transition-colors duration-200"
                   >
                     <div className="flex items-center gap-4 pr-4">
                       <div className={`p-2 rounded-xl border transition-colors ${
-                        isOpen 
-                          ? 'bg-[#B5A475]/10 border-[#B5A475]/25 text-[#B5A475]' 
+                        isOpen
+                          ? 'bg-[#B5A475]/10 border-[#B5A475]/25 text-[#B5A475]'
                           : 'bg-stone-50 dark:bg-stone-950 border-stone-200/60 dark:border-stone-850 text-stone-450'
                       }`}>
                         {item.icon}
                       </div>
-                      <span className="font-serif text-sm md:text-base text-stone-900 dark:text-stone-100 leading-tight font-medium hover:text-[#B5A475] dark:hover:text-[#B5A475] transition-colors">
+                      <span className="font-serif text-sm md:text-base text-stone-900 dark:text-stone-100 leading-tight font-medium">
                         {item.question}
                       </span>
                     </div>
@@ -145,7 +133,6 @@ export const FAQAccordion: React.FC = () => {
                     </motion.div>
                   </button>
 
-                  {/* Expanded Body Content */}
                   <AnimatePresence initial={false}>
                     {isOpen && (
                       <motion.div
@@ -165,23 +152,6 @@ export const FAQAccordion: React.FC = () => {
             })}
           </AnimatePresence>
         </div>
-
-        {/* Minimal Subtle Trust Badge */}
-        <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-stone-200/50 dark:border-stone-850/80 text-[10px] uppercase font-mono tracking-widest text-[#B5A475] font-bold">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 bg-[#B5A475] rounded-full" />
-            <span>Ética Profissional Inabalável</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 bg-[#B5A475] rounded-full" />
-            <span>Associação Brasileira de Perícias Médicas</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 bg-[#B5A475] rounded-full" />
-            <span>Rigor Científico Colegiado</span>
-          </div>
-        </div>
-
       </div>
     </section>
   );
