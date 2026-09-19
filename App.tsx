@@ -34,8 +34,6 @@ import {
 import { initAuth, googleSignIn, logout, getAccessToken, setAccessToken } from './firebase';
 import { BookingCalendar } from './components/BookingCalendar';
 import { DriveCabinet } from './components/DriveCabinet';
-import { ForensicTools } from './components/ForensicTools';
-import { VideoGenerator } from './components/VideoGenerator';
 import { WorkspaceHub } from './components/WorkspaceHub';
 import { ToastContainer } from './components/Toast';
 import { EliteLogo } from './components/EliteLogo';
@@ -636,16 +634,16 @@ export const App: React.FC = () => {
                 >
                   <div className="space-y-2">
                     <span className="text-[9px] uppercase tracking-wider text-stone-500 font-semibold">Forense</span>
-                    <h5 className="font-serif text-xl font-medium text-stone-900 dark:text-stone-101">Simulador de Danos</h5>
+                    <h5 className="font-serif text-xl font-medium text-stone-900 dark:text-stone-101">Kit do Perito</h5>
                     <p className="text-xs text-stone-500 dark:text-stone-400 font-sans leading-normal">
-                      Uma ferramenta exclusiva para escritórios advocatícios simularem tabelas de incapacidade baseadas na teoria.
+                      Ferramentas médico-legais com regras explícitas, referências e cálculos separados da conclusão pericial.
                     </p>
                   </div>
                   <button 
                     onClick={() => handleTabChange('simulator')}
                     className="text-xs text-[#B5A475] dark:text-[#B5A475] hover:text-[#C5B485] font-medium flex items-center gap-1.5 hover:underline text-left mt-4 cursor-pointer"
                   >
-                    Acessar Área do Advogado <ChevronRight size={14} />
+                    Abrir ferramentas periciais <ChevronRight size={14} />
                   </button>
                 </motion.div>
 
@@ -777,13 +775,26 @@ export const App: React.FC = () => {
               exit="exit"
               variants={animationVariants}
             >
-              {/* INCARSION SIMULATOR VIEW */}
-              <section
-                id="simulator"
-                className="max-w-7xl mx-auto px-6 py-12 space-y-12"
-              >
-                <ForensicTools />
-                <VideoGenerator />
+              <section id="simulator" className="max-w-4xl mx-auto px-6 py-16">
+                <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-3xl p-8 md:p-12 space-y-5">
+                  <span className="text-[10px] uppercase font-mono tracking-widest text-[#B5A475] font-bold">
+                    Projeto médico-legal
+                  </span>
+                  <h2 className="font-serif text-3xl md:text-4xl text-stone-900 dark:text-stone-100">
+                    Kit do Perito
+                  </h2>
+                  <p className="text-stone-500 dark:text-stone-400 text-sm leading-relaxed max-w-2xl">
+                    As ferramentas periciais foram separadas em um projeto próprio, com cálculo de Balthazard, fluxo AIPE/Brasil, notas metodológicas e testes automatizados. A ferramenta organiza método e cálculo sem produzir conclusão pericial autônoma.
+                  </p>
+                  <a
+                    href="https://joyceradis.github.io/pericia-medica/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-stone-950 dark:bg-stone-50 text-white dark:text-stone-950 rounded-xl text-xs font-bold uppercase tracking-widest"
+                  >
+                    Abrir Kit do Perito <ChevronRight size={14} />
+                  </a>
+                </div>
               </section>
             </motion.div>
           )}
