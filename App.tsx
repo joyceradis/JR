@@ -134,11 +134,6 @@ export const App: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [authLoading, setAuthLoading] = useState<boolean>(true);
 
-  // Testimonials States
-  const [testimonialIndex, setTestimonialIndex] = useState<number>(0);
-  const [testimonialFilter, setTestimonialFilter] = useState<'all' | 'juridico' | 'clinica'>('all');
-  const [testimonialLayout, setTestimonialLayout] = useState<'slider' | 'grid'>('slider');
-
   // Dark Mode State
   const [isDark, setIsDark] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
@@ -453,11 +448,11 @@ export const App: React.FC = () => {
               <div className="space-y-8 md:w-1/2 relative z-10">
                 <div className="space-y-4">
                   <h1 className="font-serif text-5xl md:text-7xl font-normal text-stone-950 dark:text-stone-50 leading-[1.1]">
-                    Elegância <br/>
-                    <span className="italic text-[#C5B485]">Clínica & Pericial.</span>
+                    Medicina <br/>
+                    <span className="italic text-[#C5B485]">Clínica, Perícia & Tecnologia.</span>
                   </h1>
                   <p className="text-stone-600 dark:text-stone-400 leading-relaxed max-w-sm text-base">
-                    Acolhimento humano para pacientes. Rigor científico exigido pelos tribunais para bancas jurídicas.
+                    Atuação médica em pronto-socorro, perícia judicial e desenvolvimento de ferramentas para fluxos clínicos e médico-legais.
                   </p>
                 </div>
 
@@ -526,7 +521,7 @@ export const App: React.FC = () => {
 
             {/* Eixos de Atuação Section */}
             <section className="space-y-12">
-               <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -534,110 +529,36 @@ export const App: React.FC = () => {
                 className="text-center max-w-2xl mx-auto space-y-2"
               >
                 <span className="text-[10px] uppercase font-mono tracking-widest bg-[#B5A475]/10 dark:bg-stone-900 border border-[#B5A475]/20 text-[#B5A475] px-3 py-1 rounded-full font-semibold">
-                  Especialidades e Consultoria
+                  Áreas de atuação
                 </span>
-                <h3 className="font-serif text-3xl md:text-4xl text-stone-900 dark:text-stone-100 font-medium">Atendimento Especializado</h3>
-                <p className="text-stone-500 dark:text-stone-400 text-xs">Clareza e direcionamento para pacientes e escritórios advocatícios.</p>
+                <h3 className="font-serif text-3xl md:text-4xl text-stone-900 dark:text-stone-100 font-medium">Medicina, perícia e sistemas</h3>
+                <p className="text-stone-500 dark:text-stone-400 text-xs">Atuação profissional descrita sem ampliar títulos, especialidades ou resultados.</p>
               </motion.div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
-                {/* Pacientes / Longevidade */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                  className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-3xl p-8 space-y-5 hover:shadow-xl transition-all group shadow-sm flex flex-col relative overflow-hidden"
-                >
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#B5A475]/10 to-transparent pointer-events-none" />
-                  <div className="inline-flex p-3 rounded-xl bg-stone-100 dark:bg-stone-950 text-[#B5A475] w-fit border border-stone-200/50 dark:border-stone-850">
-                    <UserIcon size={20} />
-                  </div>
-                  <div>
-                    <span className="text-[9px] uppercase tracking-widest text-[#B5A475] font-extrabold mb-1 block font-mono">Para Pacientes</span>
-                    <h4 className="font-serif text-xl font-bold text-stone-900 dark:text-stone-100 group-hover:text-[#B5A475] transition-colors">Longevidade e Vitalidade</h4>
-                  </div>
-                  <p className="text-stone-500 dark:text-stone-400 text-xs leading-relaxed font-sans flex-grow">
-                    Acompanhamento focado em medicina de estilo de vida, longevidade mitocondrial e prevenção ativa. Abordagem empática, elegante e personalizada para maximizar sua performance biológica e anos de vida saudáveis.
+                <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-3xl p-8 space-y-4">
+                  <UserIcon size={20} className="text-[#B5A475]" />
+                  <h4 className="font-serif text-xl font-bold text-stone-900 dark:text-stone-100">Pronto-socorro e cuidado agudo</h4>
+                  <p className="text-stone-500 dark:text-stone-400 text-xs leading-relaxed">
+                    Atuação assistencial como médica generalista em contextos de urgência e emergência.
                   </p>
-                  <ul className="space-y-2 text-[11px] text-stone-605 dark:text-stone-300 font-semibold border-t border-stone-100 dark:border-stone-800 pt-4">
-                    <li className="flex items-center gap-2"><Check size={12} className="text-[#B5A475] shrink-0" /> Planejamento de Longevidade Celular</li>
-                    <li className="flex items-center gap-2"><Check size={12} className="text-[#B5A475] shrink-0" /> Gestão Nutracêutica & Estilo de Vida</li>
-                    <li className="flex items-center gap-2"><Check size={12} className="text-[#B5A475] shrink-0" /> Protocolos Preventivos de Envelhecimento</li>
-                  </ul>
-                  <button
-                    onClick={() => handleTabChange('booking')}
-                    className="w-full py-3 mt-4 bg-[#B5A475]/10 dark:bg-[#B5A475]/5 text-[#B5A475] border border-[#B5A475]/20 hover:bg-[#B5A475] hover:text-[#0c0a09] dark:hover:text-[#0c0a09] rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all cursor-pointer font-sans"
-                  >
-                    Agendar Longevidade
-                  </button>
-                </motion.div>
+                </div>
 
-                {/* Advogados - Benefícios INSS Previdenciários */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                  className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-3xl p-8 space-y-5 hover:shadow-xl transition-all group shadow-sm flex flex-col relative overflow-hidden"
-                >
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#B5A475]/10 to-transparent pointer-events-none" />
-                  <div className="inline-flex p-3 rounded-xl bg-stone-100 dark:bg-stone-950 text-[#B5A475] w-fit border border-stone-200/50 dark:border-stone-850">
-                    <Scale size={20} />
-                  </div>
-                  <div>
-                    <span className="text-[9px] uppercase tracking-widest text-[#B5A475] font-extrabold mb-1 block font-mono">Para Bancas de Advocacia</span>
-                    <h4 className="font-serif text-xl font-bold text-stone-900 dark:text-stone-100 group-hover:text-[#B5A475] transition-colors">Laudos de Alto Valor</h4>
-                  </div>
-                  <p className="text-stone-550 dark:text-stone-400 text-xs leading-relaxed font-sans flex-grow">
-                    Pareceres e documentos médicos periciais de alto valor científico. Conexão rigorosa para aumentar drasticamente as chances de concessão e restabelecimento de benefícios previdenciários e assistenciais (INSS, incapacidades).
+                <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-3xl p-8 space-y-4">
+                  <Scale size={20} className="text-[#B5A475]" />
+                  <h4 className="font-serif text-xl font-bold text-stone-900 dark:text-stone-100">Perícia médica judicial</h4>
+                  <p className="text-stone-500 dark:text-stone-400 text-xs leading-relaxed">
+                    Atuação como médica perita nomeada em processos judiciais, com delimitação do objeto, análise documental e fundamentação técnica.
                   </p>
-                  <ul className="space-y-2 text-[11px] text-stone-650 dark:text-stone-300 font-semibold border-t border-stone-100 dark:border-stone-800 pt-4">
-                    <li className="flex items-center gap-2"><Check size={12} className="text-[#B5A475] shrink-0" /> Quesitação Científica para Benefícios INSS</li>
-                    <li className="flex items-center gap-2"><Check size={12} className="text-[#B5A475] shrink-0" /> Impugnação de Laudos Administrativos</li>
-                    <li className="flex items-center gap-2"><Check size={12} className="text-[#B5A475] shrink-0" /> Parecer de Nexo Causal e Funcionalidade</li>
-                  </ul>
-                  <button
-                    onClick={() => handleTabChange('simulator')}
-                    className="w-full py-3 mt-4 bg-[#B5A475]/10 dark:bg-[#B5A475]/5 text-[#B5A475] border border-[#B5A475]/20 hover:bg-[#B5A475] hover:text-[#0c0a09] dark:hover:text-[#0c0a09] rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all cursor-pointer font-sans"
-                  >
-                    Espaço Pericial
-                  </button>
-                </motion.div>
+                </div>
 
-                {/* Advogados - Comprovação IRPF Isenções */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-3xl p-8 space-y-5 hover:shadow-xl transition-all group shadow-sm flex flex-col relative overflow-hidden"
-                >
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#B5A475]/10 to-transparent pointer-events-none" />
-                  <div className="inline-flex p-3 rounded-xl bg-stone-100 dark:bg-stone-950 text-[#B5A475] w-fit border border-stone-200/50 dark:border-stone-850">
-                    <Briefcase size={20} />
-                  </div>
-                  <div>
-                    <span className="text-[9px] uppercase tracking-widest text-[#B5A475] font-extrabold mb-1 block font-mono">Para Bancas de Advocacia</span>
-                    <h4 className="font-serif text-xl font-bold text-stone-900 dark:text-stone-100 group-hover:text-[#B5A475] transition-colors">Isenção Fiscal de IRPF</h4>
-                  </div>
-                  <p className="text-stone-550 dark:text-stone-400 text-xs leading-relaxed font-sans flex-grow">
-                    Laudos periciais e análises documentais médicos profundas para comprovação cabal de moléstias graves em sede administrativa ou judicial, fundamentando pedidos de isenção de IRPF aos contribuintes.
+                <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-850 rounded-3xl p-8 space-y-4">
+                  <Briefcase size={20} className="text-[#B5A475]" />
+                  <h4 className="font-serif text-xl font-bold text-stone-900 dark:text-stone-100">Clinical software e healthtech</h4>
+                  <p className="text-stone-500 dark:text-stone-400 text-xs leading-relaxed">
+                    Desenvolvimento de ferramentas a partir de problemas reais de documentação, workflow, rastreabilidade e apoio à decisão.
                   </p>
-                  <ul className="space-y-2 text-[11px] text-stone-650 dark:text-stone-300 font-semibold border-t border-stone-100 dark:border-stone-800 pt-4">
-                    <li className="flex items-center gap-2"><Check size={12} className="text-[#B5A475] shrink-0" /> Comprovação de Moléstias Graves</li>
-                    <li className="flex items-center gap-2"><Check size={12} className="text-[#B5A475] shrink-0" /> Históricos Médicos Retrospectivos Irrefutáveis</li>
-                    <li className="flex items-center gap-2"><Check size={12} className="text-[#B5A475] shrink-0" /> Embasamento Técnico p/ Isenção de IRPF</li>
-                  </ul>
-                  <button
-                    onClick={() => handleTabChange('simulator')}
-                    className="w-full py-3 mt-4 bg-[#B5A475]/10 dark:bg-[#B5A475]/5 text-[#B5A475] border border-[#B5A475]/20 hover:bg-[#B5A475] hover:text-[#0c0a09] dark:hover:text-[#0c0a09] rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all cursor-pointer font-sans"
-                  >
-                    Análise Documental
-                  </button>
-                </motion.div>
-
+                </div>
               </div>
             </section>
 
@@ -731,261 +652,7 @@ export const App: React.FC = () => {
               </div>
             </section>
 
-            {/* ==================== TESTIMONIALS SECTION ==================== */}
-            <section className="space-y-12 pt-8 border-t border-stone-200/50">
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="text-center max-w-2xl mx-auto space-y-3"
-              >
-                <span className="inline-flex items-center gap-1 text-[10px] uppercase font-mono tracking-widest bg-[#B5A475]/10 text-[#B5A475] px-3.5 py-1 rounded-full font-black">
-                  <Sparkles size={10} /> Depoimentos & Reconhecimento
-                </span>
-                <h3 className="font-serif text-3xl md:text-4xl text-stone-900 font-bold">Vozes de Confiança</h3>
-                <p className="text-stone-500 text-xs">
-                  Relatos reais de superação e precisão técnica sob absoluto sigilo e ética profissional.
-                </p>
-              </motion.div>
-
-              {/* Controls: Filter and Layout View Switcher */}
-              <div className="flex flex-col sm:flex-row gap-4 items-center justify-between bg-stone-50 p-3 rounded-2xl border border-stone-200/50 max-w-5xl mx-auto">
-                {/* Categorized Filter Tabs */}
-                <div className="flex flex-wrap gap-1.5 justify-center sm:justify-start">
-                  <button
-                    onClick={() => { setTestimonialFilter('all'); setTestimonialIndex(0); }}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                      testimonialFilter === 'all'
-                        ? 'bg-stone-950 text-white shadow-sm'
-                        : 'text-stone-600 hover:bg-stone-150 hover:text-stone-900'
-                    }`}
-                  >
-                    Todos ({TESTIMONIALS.length})
-                  </button>
-                  <button
-                    onClick={() => { setTestimonialFilter('juridico'); setTestimonialIndex(0); }}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                      testimonialFilter === 'juridico'
-                        ? 'bg-stone-950 text-white shadow-sm'
-                        : 'text-stone-600 hover:bg-stone-150 hover:text-stone-900'
-                    }`}
-                  >
-                    Perícia & Justiça ({TESTIMONIALS.filter(t => t.category === 'juridico').length})
-                  </button>
-                  <button
-                    onClick={() => { setTestimonialFilter('clinica'); setTestimonialIndex(0); }}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                      testimonialFilter === 'clinica'
-                        ? 'bg-stone-950 text-white shadow-sm'
-                        : 'text-stone-600 hover:bg-stone-150 hover:text-stone-900'
-                    }`}
-                  >
-                    Clínica & Bem-Estar ({TESTIMONIALS.filter(t => t.category === 'clinica').length})
-                  </button>
-                </div>
-
-                {/* Grid vs Slider View Toggle */}
-                <div className="flex gap-1 bg-stone-200/50 p-1 rounded-xl">
-                  <button
-                    onClick={() => setTestimonialLayout('slider')}
-                    title="Visualização em Carrossel"
-                    className={`p-2 rounded-lg transition-all cursor-pointer ${
-                      testimonialLayout === 'slider'
-                        ? 'bg-white text-stone-900 shadow-xs'
-                        : 'text-stone-500 hover:text-stone-800'
-                    }`}
-                  >
-                    <SlidersHorizontal size={14} />
-                  </button>
-                  <button
-                    onClick={() => setTestimonialLayout('grid')}
-                    title="Visualização em Grade"
-                    className={`p-2 rounded-lg transition-all cursor-pointer ${
-                      testimonialLayout === 'grid'
-                        ? 'bg-white text-stone-900 shadow-xs'
-                        : 'text-stone-500 hover:text-stone-800'
-                    }`}
-                  >
-                    <LayoutGrid size={14} />
-                  </button>
-                </div>
-              </div>
-
-              {/* Dynamic Views Pane */}
-              {(() => {
-                const filtered = TESTIMONIALS.filter(t => 
-                  testimonialFilter === 'all' ? true : t.category === testimonialFilter
-                );
-                const current = filtered[testimonialIndex] || filtered[0] || TESTIMONIALS[0];
-                
-                return (
-                  <div className="max-w-5xl mx-auto min-h-[340px] flex flex-col justify-center">
-                    <AnimatePresence mode="wait">
-                      {testimonialLayout === 'slider' ? (
-                        /* CAROUSEL / SLIDER VIEW */
-                        <motion.div
-                          key={`slider-${testimonialFilter}-${testimonialIndex}`}
-                          initial={{ opacity: 0, x: 20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: -20 }}
-                          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                          className="bg-white border border-[#B5A475]/15 rounded-[32px] p-8 md:p-12 shadow-xl hover:shadow-2xl transition-all relative overflow-hidden flex flex-col justify-between"
-                        >
-                          {/* Decorative elements */}
-                          <div className="absolute top-6 right-8 text-stone-100 font-serif text-8xl md:text-9xl pointer-events-none select-none italic font-black text-right opacity-80 leading-none">
-                            ”
-                          </div>
-
-                          <div className="space-y-6 relative z-10">
-                            {/* Rating and category */}
-                            <div className="flex items-center justify-between">
-                              <div className="flex gap-1 text-[#B5A475]">
-                                {Array.from({ length: current.rating }).map((_, i) => (
-                                  <Star key={i} size={13} className="fill-[#B5A475]" />
-                                ))}
-                              </div>
-                              <span className="text-[10px] font-mono font-black uppercase tracking-widest bg-stone-100 text-[#B5A475] px-2.5 py-1 rounded-lg flex items-center gap-1 border border-stone-200/50">
-                                <Lock size={9} /> {current.badge}
-                              </span>
-                            </div>
-
-                            {/* Highlight */}
-                            <h4 className="font-serif italic text-lg md:text-xl text-[#B5A475] font-semibold leading-relaxed max-w-4xl">
-                              "{current.highlight}"
-                            </h4>
-
-                            {/* Testimonial body */}
-                            <p className="text-stone-600 font-sans text-xs md:text-sm leading-relaxed max-w-4xl">
-                              {current.text}
-                            </p>
-                          </div>
-
-                          {/* Footer Info & Slider Arrows */}
-                          <div className="border-t border-stone-100 pt-6 mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 relative z-10">
-                            <div>
-                              <cite className="not-italic text-sm font-bold text-stone-900 block font-sans">
-                                {current.author}
-                              </cite>
-                              <span className="text-xs text-stone-500 font-sans">
-                                {current.role}
-                              </span>
-                            </div>
-
-                            {/* Carousel Arrows */}
-                            <div className="flex items-center gap-3">
-                              <span className="text-[11px] font-mono text-stone-400">
-                                {testimonialIndex + 1} de {filtered.length}
-                              </span>
-                              
-                              <div className="flex items-center gap-2">
-                                <button
-                                  onClick={() => {
-                                    setTestimonialIndex(prev => prev === 0 ? filtered.length - 1 : prev - 1);
-                                  }}
-                                  className="p-2.5 rounded-full border border-stone-200 hover:border-stone-400 bg-white text-stone-700 hover:text-stone-900 transition-all shadow-xs cursor-pointer active:scale-95"
-                                  title="Anterior"
-                                >
-                                  <ChevronLeft size={16} />
-                                </button>
-                                <button
-                                  onClick={() => {
-                                    setTestimonialIndex(prev => prev === filtered.length - 1 ? 0 : prev + 1);
-                                  }}
-                                  className="p-2.5 rounded-full border border-stone-200 hover:border-[#B5A475] bg-[#FCFAF6] text-[#B5A475] hover:bg-[#B5A475] hover:text-white transition-all shadow-xs cursor-pointer active:scale-95"
-                                  title="Próximo"
-                                >
-                                  <ChevronRight size={16} />
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </motion.div>
-                      ) : (
-                        /* GRID VIEW */
-                        <motion.div
-                          key={`grid-${testimonialFilter}`}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.5 }}
-                          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                        >
-                          {filtered.map((item, idx) => {
-                            const isMainFeatured = idx === 0 || idx === 3;
-                            return (
-                              <motion.div
-                                key={item.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                                className={`rounded-3xl p-6 border flex flex-col justify-between min-h-[300px] hover:scale-[1.01] transition-all duration-300 ${
-                                  isMainFeatured
-                                    ? 'bg-stone-950 text-white border-stone-800 shadow-lg'
-                                    : 'bg-white text-stone-800 border-stone-150 shadow-xs'
-                                }`}
-                              >
-                                <div className="space-y-4">
-                                  <div className="flex items-center justify-between">
-                                    <div className="flex gap-0.5">
-                                      {Array.from({ length: item.rating }).map((_, i) => (
-                                        <Star 
-                                          key={i} 
-                                          size={11} 
-                                          className="fill-[#B5A475] text-[#B5A475]" 
-                                        />
-                                      ))}
-                                    </div>
-                                    <span className={`text-[8px] font-mono font-black uppercase tracking-widest px-2 py-0.5 rounded-md flex items-center gap-1 ${
-                                      isMainFeatured 
-                                        ? 'bg-white/10 text-[#B5A475] border border-white/10' 
-                                        : 'bg-stone-100 text-stone-500 border border-stone-250/60'
-                                    }`}>
-                                      <Lock size={8} /> {item.badge}
-                                    </span>
-                                  </div>
-
-                                  <p className={`text-xs leading-relaxed font-sans italic ${
-                                    isMainFeatured ? 'text-stone-300' : 'text-stone-600'
-                                  }`}>
-                                    "{item.text}"
-                                  </p>
-                                </div>
-
-                                <div className={`border-t pt-4 mt-4 ${
-                                  isMainFeatured ? 'border-white/10' : 'border-stone-100'
-                                }`}>
-                                  <cite className="not-italic text-xs font-bold block font-sans">
-                                    {item.author}
-                                  </cite>
-                                  <span className={`text-[10px] block truncate ${
-                                    isMainFeatured ? 'text-[#B5A475]' : 'text-stone-500'
-                                  }`}>
-                                    {item.role}
-                                  </span>
-                                </div>
-                              </motion.div>
-                            );
-                          })}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })()}
-
-              {/* Verified Badge and Compliance disclaimer */}
-              <div className="text-center max-w-xl mx-auto bg-stone-100/50 p-4 rounded-2xl border border-stone-200/40">
-                <span className="inline-flex items-center gap-1.5 text-[9px] uppercase font-bold text-stone-400">
-                  <ShieldCheck size={12} className="text-emerald-500" /> Identidade Protegida via LGPD & Código de Ética do CFM
-                </span>
-                <p className="text-[9.5px] text-stone-400 mt-1 sm:px-6 leading-normal font-sans">
-                  Em estrito cumprimento ao Artigo 75 do Código de Ética Médica e à Lei Geral de Proteção de Dados, as narrativas foram anonimizadas de forma a preservar plenamente o sigilo profissional de pacientes e a discrição processual de contrapartes.
-                </p>
-              </div>
-            </section>
-          </section>
+                      </section>
         </motion.div>
       )}
 
@@ -1054,7 +721,7 @@ export const App: React.FC = () => {
                     Solicitação de Parecer Pericial
                   </h2>
                   <p className="text-stone-500 dark:text-stone-400 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
-                    Precisa de um laudo minucioso ou assistência técnica contundente em processos previdenciários e tributários? Envie os detalhes preliminares do caso para uma análise ágil de viabilidade e agendamento de despacho.
+                    Para demandas médico-legais, envie o objeto da análise e a documentação disponível para alinhamento de escopo técnico e disponibilidade.
                   </p>
                 </div>
 
@@ -1090,7 +757,7 @@ export const App: React.FC = () => {
                       <p className="text-stone-500 dark:text-stone-400 text-xs">Para o envio inicial de prontuários em PDF, quesitação e históricos longos.</p>
                     </div>
                     <a
-                      href="mailto:admin@drajoyceradis.com?subject=Solicitação de Laudo/Assistência Técnica Jurídica"
+                      href="mailto:contato@drajoyceradis.com?subject=Solicitação de Laudo/Assistência Técnica Jurídica"
                       className="mt-auto px-8 py-3 bg-stone-900 dark:bg-[#B5A475] hover:bg-stone-800 dark:hover:bg-[#a99767] text-white rounded-xl text-xs font-bold uppercase tracking-widest transition-all shadow-md group-hover:scale-105"
                     >
                       Enviar E-mail com Anexos
@@ -1147,226 +814,58 @@ export const App: React.FC = () => {
               exit="exit"
               variants={animationVariants}
             >
-              {/* ABOUT BIOGRAPHY VIEW - ELITE CURRICULUM VITAE */}
-              <section
-                id="about"
-                className="max-w-7xl mx-auto px-6 py-12 md:py-24"
-              >
-                <div className="flex flex-col lg:flex-row gap-16 items-start">
-                  
-                  {/* Portrait Column (High-End Editorial Sidebar) */}
-                  <div className="w-full lg:w-[35%] lg:sticky lg:top-32 space-y-6">
-                    <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-stone-200/60 dark:border-stone-850 group bg-stone-100 dark:bg-stone-900">
-                      {/* Premium Accent Corner lines reflecting luxury architecture */}
-                      <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#B5A475] z-20 pointer-events-none" />
-                      <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#B5A475] z-20 pointer-events-none" />
-                      
-                      <div className="aspect-[3/4] overflow-hidden relative">
-                        <img 
-                          src="/src/assets/images/elegant_medical_pericia_1782157337837.jpg" 
-                          alt="Dra. Joyce Radis - Rigor Médico-Pericial" 
-                          className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" 
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-stone-950/20" />
-                      </div>
+              <section id="about" className="max-w-5xl mx-auto px-6 py-12 md:py-24">
+                <div className="space-y-10">
+                  <div className="space-y-4">
+                    <span className="text-[10px] bg-[#B5A475]/10 text-[#B5A475] px-3.5 py-1.5 rounded-full uppercase tracking-widest font-black inline-block font-mono border border-[#B5A475]/15">
+                      Perfil profissional
+                    </span>
+                    <h2 className="font-serif text-4xl md:text-5xl font-light text-stone-900 dark:text-stone-100 leading-tight">
+                      Dra. Joyce Radis
+                    </h2>
+                    <p className="text-stone-550 dark:text-stone-400 font-sans text-sm leading-relaxed max-w-3xl">
+                      Médica, CRM/ES 21188, com atuação em pronto-socorro e perícia médica judicial. Também desenvolvo software e ferramentas digitais a partir de problemas que encontro na prática clínica e médico-legal.
+                    </p>
+                  </div>
 
-                      <div className="absolute inset-x-0 bottom-0 p-8 text-white space-y-2">
-                        <span className="text-[9px] uppercase font-mono tracking-[0.24em] text-[#B5A475] font-bold block">
-                          CRM/ES 21188 • RQE Pericial
-                        </span>
-                        <h3 className="font-serif text-3xl font-light tracking-tight text-white leading-tight">
-                          Dra. Joyce Radis
-                        </h3>
-                        <p className="text-[10.5px] text-stone-300 font-sans tracking-wide leading-relaxed">
-                          Médica graduada com distinção clínica, especialista dedicada ao auxílio de tribunais de justiça e à promoção ativa da vitalidade celular integral.
-                        </p>
-                      </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="border border-stone-150 dark:border-stone-850 p-6 rounded-2xl bg-white/40 dark:bg-stone-900/10 space-y-2">
+                      <Award size={18} className="text-[#B5A475]" />
+                      <h3 className="font-serif font-bold text-stone-900 dark:text-white">Medicina assistencial</h3>
+                      <p className="text-stone-500 dark:text-stone-400 text-xs leading-relaxed">
+                        Experiência em urgência, emergência e cuidado agudo, com foco em documentação clara e continuidade do atendimento.
+                      </p>
                     </div>
 
-                    {/* Quick Professional Credentials Block */}
-                    <div className="bg-stone-50/80 dark:bg-[#0c0a09]/80 border border-stone-150 dark:border-stone-850 p-6 rounded-2xl space-y-4">
-                      <span className="text-[8.5px] uppercase font-mono tracking-widest text-stone-400 font-extrabold block">REGISTROS E CONSELHOS</span>
-                      <div className="space-y-3.5 text-xs text-stone-600 dark:text-stone-350">
-                        <div className="flex justify-between items-center border-b border-stone-150 dark:border-stone-800 pb-2">
-                          <span className="font-sans font-medium">Inscrição CRM Principal:</span>
-                          <span className="font-mono font-bold text-stone-900 dark:text-white">CRM/ES 21188</span>
-                        </div>
-                        <div className="flex justify-between items-center border-b border-stone-150 dark:border-stone-800 pb-2">
-                          <span className="font-sans font-medium">Atuação Forense Federal:</span>
-                          <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">Credenciada TRF-2</span>
-                        </div>
-                        <div className="flex justify-between items-center pb-1">
-                          <span className="font-sans font-medium">Membro Colegiado Principal:</span>
-                          <span className="font-mono font-bold text-[#B5A475]">SBPM Perícias</span>
-                        </div>
-                      </div>
+                    <div className="border border-stone-150 dark:border-stone-850 p-6 rounded-2xl bg-white/40 dark:bg-stone-900/10 space-y-2">
+                      <Scale size={18} className="text-[#B5A475]" />
+                      <h3 className="font-serif font-bold text-stone-900 dark:text-white">Perícia médica judicial</h3>
+                      <p className="text-stone-500 dark:text-stone-400 text-xs leading-relaxed">
+                        Trabalho orientado por objeto pericial, documentação, método, nexo e limites técnicos da conclusão médica.
+                      </p>
+                    </div>
+
+                    <div className="border border-stone-150 dark:border-stone-850 p-6 rounded-2xl bg-white/40 dark:bg-stone-900/10 space-y-2">
+                      <Briefcase size={18} className="text-[#B5A475]" />
+                      <h3 className="font-serif font-bold text-stone-900 dark:text-white">Medicina × software</h3>
+                      <p className="text-stone-500 dark:text-stone-400 text-xs leading-relaxed">
+                        Projetos em documentação clínica, workflow, educação médica, auditoria e tecnologia médico-legal.
+                      </p>
                     </div>
                   </div>
 
-                  {/* Comprehensive Curriculum Content (Impeccable & Huge) */}
-                  <div className="w-full lg:w-[65%] space-y-16">
-                    
-                    {/* Header Introduction */}
-                    <div className="space-y-4">
-                      <span className="text-[10px] bg-[#B5A475]/10 text-[#B5A475] px-3.5 py-1.5 rounded-full uppercase tracking-widest font-black inline-block font-mono border border-[#B5A475]/15">
-                        REGISTRO DE QUALIFICAÇÃO E RECONHECIMENTO
-                      </span>
-                      <h2 className="font-serif text-4xl md:text-5xl font-light text-stone-900 dark:text-stone-100 leading-tight">
-                        Currículo Profissional <br/>
-                        <span className="italic font-medium text-[#B5A475]">Elegância e Rigor Científico</span>
-                      </h2>
-                      <p className="text-stone-550 dark:text-stone-400 font-sans text-xs md:text-sm leading-relaxed pt-2">
-                        O percurso profissional da Dra. Joyce Radis pauta-se no entrelaçamento de dois campos científicos exigentes: o <b>rigor pericial normativo</b> necessário para garantir a idoneidade técnica em litígios judiciais de alta monta, e a <b>ciência da longevidade celular</b> voltada à promoção ativa da integridade físico-química de seus pacientes particulares.
-                      </p>
-                    </div>
-
-                    {/* Bento CV Blocks - Large Multi-Section Grid */}
-                    <div className="space-y-10">
-                      
-                      {/* Section 1: Academics (Formação Superior de Base) */}
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-3 text-stone-950 dark:text-stone-50 border-b border-stone-150 dark:border-stone-800 pb-3">
-                          <BookOpen className="text-[#B5A475] shrink-0" size={20} />
-                          <h3 className="font-serif text-xl font-semibold tracking-tight">Formação Acadêmica de Base & Lato Sensu</h3>
-                        </div>
-                        
-                        <div className="relative border-l border-[#B5A475]/30 pl-6 ml-3 space-y-8">
-                          
-                          {/* Item 1 */}
-                          <div className="relative">
-                            <span className="absolute -left-[30px] top-1.5 w-3.5 h-3.5 rounded-full bg-stone-950 dark:bg-[#B5A475] border-2 border-white dark:border-stone-950 shadow-md" />
-                            <div className="space-y-1">
-                              <span className="text-[10px] font-bold font-mono text-[#B5A475] uppercase">Graduação em Medicina</span>
-                              <h4 className="font-serif text-sm md:text-md text-stone-900 dark:text-stone-100 font-semibold">
-                                Escola Superior de Ciências da Santa Casa de Misericórdia de Vitória (EMESCAM)
-                              </h4>
-                              <p className="text-stone-500 dark:text-stone-405 text-xs font-sans leading-relaxed">
-                                Formada em uma das instituições de maior prestígio clínico do país. Residência observacional intensa com ênfase em diagnóstico clínico diferencial complexo, clínica médica geral e semiologia médica avançada.
-                              </p>
-                            </div>
-                          </div>
-
-                          {/* Item 2 */}
-                          <div className="relative">
-                            <span className="absolute -left-[30px] top-1.5 w-3.5 h-3.5 rounded-full bg-stone-950 dark:bg-[#B5A475] border-2 border-white dark:border-stone-950 shadow-md" />
-                            <div className="space-y-1">
-                              <span className="text-[10px] font-bold font-mono text-[#B5A475] uppercase">Pós-Graduação Lato Sensu</span>
-                              <h4 className="font-serif text-sm md:text-md text-stone-900 dark:text-stone-100 font-semibold">
-                                Perícia Médica & Ciências Forenses de Alta Performance
-                              </h4>
-                              <p className="text-stone-500 dark:text-stone-405 text-xs font-sans leading-relaxed">
-                                Foco direcionado à avaliação cível e trabalhista do dano corporal, computação do nexo epidemiológico e causal em patologias laborais, simulações de invalidez, e aplicação rigorosa das escalas de incapacidade segundo as doutrinas de Balthazard e as diretrizes do CPC (Código de Processo Civil).
-                              </p>
-                            </div>
-                          </div>
-
-                          {/* Item 3 */}
-                          <div className="relative">
-                            <span className="absolute -left-[30px] top-1.5 w-3.5 h-3.5 rounded-full bg-stone-950 dark:bg-[#B5A475] border-2 border-white dark:border-stone-950 shadow-md" />
-                            <div className="space-y-1">
-                              <span className="text-[10px] font-bold font-mono text-[#B5A475] uppercase">Especialização Avançada</span>
-                              <h4 className="font-serif text-sm md:text-md text-stone-900 dark:text-stone-100 font-semibold">
-                                Medicina de Longevidade Celular e Estilo de Vida Ativo
-                              </h4>
-                              <p className="text-stone-500 dark:text-stone-405 text-xs font-sans leading-relaxed">
-                                Formação específica em biohacking clínico, fisiologia molecular baseada na integridade mitocondrial, equilíbrio hormonal avançado, marcadores inflamatórios crônicos subclínicos e nutracêutica celular preventiva.
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Section 2: Forensic Expertise (A Atuação Pericial Detalhada) */}
-                      <div className="space-y-4 pt-4">
-                        <div className="flex items-center gap-3 text-stone-950 dark:text-stone-50 border-b border-stone-150 dark:border-stone-800 pb-3">
-                          <Scale className="text-[#B5A475] shrink-0" size={20} />
-                          <h3 className="font-serif text-xl font-semibold tracking-tight">Experiência Forense & Consultoria Médico-Legal</h3>
-                        </div>
-                        
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                          
-                          <div className="border border-stone-150 dark:border-stone-850 p-5 rounded-2xl bg-white/20 dark:bg-stone-900/10 space-y-2">
-                            <div className="w-8 h-8 rounded-lg bg-[#B5A475]/10 flex items-center justify-center text-[#B5A475]">
-                              <Award size={16} />
-                            </div>
-                            <h4 className="font-serif font-bold text-stone-900 dark:text-white text-xs md:text-sm">Auxiliar da Justiça (Justiça Estadual e Federal)</h4>
-                            <p className="text-stone-500 dark:text-stone-400 text-xs font-sans leading-relaxed">
-                              Nomeada recorrentemente como Perita de Confiança do Juízo em varas previdenciárias e cíveis. Total domínio na redação de laudos periciais criminais e civis conclusivos e incontestáveis.
-                            </p>
-                          </div>
-
-                          <div className="border border-stone-150 dark:border-stone-850 p-5 rounded-2xl bg-white/20 dark:bg-stone-900/10 space-y-2">
-                            <div className="w-8 h-8 rounded-lg bg-[#B5A475]/10 flex items-center justify-center text-[#B5A475]">
-                              <Briefcase size={16} />
-                            </div>
-                            <h4 className="font-serif font-bold text-stone-900 dark:text-white text-xs md:text-sm">Assistência Técnica de Alta Performance</h4>
-                            <p className="text-stone-500 dark:text-stone-400 text-xs font-sans leading-relaxed">
-                              Elaboração de pareceres técnicos divergentes e formulação de quesitos estratégicos de alta complexidade para escritórios de advocacia que buscam a reforma de decisões desfavoráveis.
-                            </p>
-                          </div>
-
-                          <div className="border border-stone-150 dark:border-stone-850 p-5 rounded-2xl bg-white/20 dark:bg-stone-900/10 space-y-2">
-                            <div className="w-8 h-8 rounded-lg bg-[#B5A475]/10 flex items-center justify-center text-[#B5A475]">
-                              <FileText size={16} />
-                            </div>
-                            <h4 className="font-serif font-bold text-stone-900 dark:text-white text-xs md:text-sm">Nexo de Causalidade Previdenciário (INSS)</h4>
-                            <p className="text-stone-500 dark:text-stone-400 text-xs font-sans leading-relaxed">
-                              Investigação profunda de histórico ocupacional com a formulação de nexo patológico para reverter indeferimentos administrativos junto à Previdência Social.
-                            </p>
-                          </div>
-
-                          <div className="border border-stone-150 dark:border-stone-850 p-5 rounded-2xl bg-white/20 dark:bg-stone-900/10 space-y-2">
-                            <div className="w-8 h-8 rounded-lg bg-[#B5A475]/10 flex items-center justify-center text-[#B5A475]">
-                              <ShieldCheck size={16} />
-                            </div>
-                            <h4 className="font-serif font-bold text-stone-900 dark:text-white text-xs md:text-sm">Isenção Fiscal de Moléstia Grave (IRPF)</h4>
-                            <p className="text-stone-500 dark:text-stone-400 text-xs font-sans leading-relaxed">
-                              Análise crítica exaustiva de prontuários históricos em consonância com a Lei 7.713/88 de modo a fundamentar o direito adquirido do contribuinte portador de enfermidade grave.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Section 3: Longevity Practice (Metodologia de Longevidade Celular) */}
-                      <div className="space-y-4 pt-4">
-                        <div className="flex items-center gap-3 text-stone-950 dark:text-stone-50 border-b border-stone-150 dark:border-stone-800 pb-3">
-                          <Sparkles className="text-[#B5A475] shrink-0" size={20} />
-                          <h3 className="font-serif text-xl font-semibold tracking-tight">Otimização Celular & Medicina de Suporte Ativo</h3>
-                        </div>
-                        
-                        <p className="text-stone-500 dark:text-stone-400 text-xs md:text-sm leading-relaxed">
-                          Ficou no passado a medicina que limita-se a prescrever fármacos sintomáticos para dismetabolismos estabelecidos. A abordagem integrativa visa a longevidade funcional através do reestabelecimento bioquímico molecular:
-                        </p>
-
-                        <div className="space-y-3.5 pt-2">
-                          {[
-                            { title: "Mapeamento Funcional de Biomarcadores:", text: "Aferição exaustiva de hormônios ativos, estresse oxidativo, inflamação crônica silenciosa e exames bioquímicos especializados que preveem o declínio físico." },
-                            { title: "Reprogramação Mitocondrial & Manejo de Fadiga:", text: "Indicação de micronutrientes específicos e mudança direcionada de hábitos circadianos para reestabelecer o vigor celular e a energia mental." },
-                            { title: "Prescrição Nutracêutica de Alta Sinergia:", text: "Formulações personalizadas voltadas à modulação epigenética, combatendo ativamente o estresse celular e reforçando a plasticidade neuronal." }
-                          ].map((item, index) => (
-                            <div key={index} className="flex gap-4 items-start p-4 bg-stone-50 hover:bg-white dark:bg-[#0c0a09]/50 dark:hover:bg-stone-900/30 border border-stone-150 dark:border-stone-850 rounded-xl transition-all">
-                              <span className="font-serif text-base font-bold text-[#B5A475] leading-none shrink-0 mt-0.5">0{index+1}</span>
-                              <div className="space-y-0.5 text-xs">
-                                <span className="font-serif font-bold text-stone-900 dark:text-white block">{item.title}</span>
-                                <span className="text-stone-500 dark:text-stone-400 leading-relaxed block">{item.text}</span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                    </div>
-
-                    {/* Exquisite Quote block (Inspirational) */}
-                    <div className="p-8 bg-stone-50 dark:bg-stone-950 border border-stone-150 dark:border-stone-850 rounded-3xl border-l-[6px] border-l-[#B5A475] relative overflow-hidden">
-                      <div className="absolute top-0 right-0 p-4 opacity-5 text-stone-500 pointer-events-none">
-                        <Quote size={80} />
-                      </div>
-                      <p className="font-serif italic text-stone-800 dark:text-stone-200 leading-relaxed md:text-lg relative z-10">
-                        \"A medicina pericial é a tradução fiel da verdade biológica para a letra fria da lei; enquanto a medicina integrativa celular é a busca pela verdade interna para prolongar a vida com vigor. Ambos exigem a mesma virtude: rigor técnico absoluto e respeito soberano à vida.\"
-                      </p>
-                    </div>
-
+                  <div className="p-6 bg-stone-50 dark:bg-stone-950 border border-stone-150 dark:border-stone-850 rounded-3xl">
+                    <p className="text-sm text-stone-600 dark:text-stone-300 leading-relaxed">
+                      Princípio de trabalho: automação pode reduzir trabalho repetitivo, mas não deve transformar ausência de dado em achado, sugestão em fato ou evidência em conclusão.
+                    </p>
+                    <a
+                      href="https://github.com/joyceradis"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block mt-4 text-xs font-semibold text-[#B5A475] hover:underline"
+                    >
+                      Ver projetos públicos no GitHub
+                    </a>
                   </div>
                 </div>
               </section>
