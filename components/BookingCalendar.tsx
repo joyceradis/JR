@@ -13,21 +13,20 @@ interface BookingCalendarProps {
 }
 
 const SERVICE_TYPES = [
-  { id: 'LongevityCell', label: 'Avaliação de Longevidade Celular', duration: '75 min', price: 'R$ 650', desc: 'Mapeamento detalhado e planejamento funcional de biomarcadores focado em maximizar o tempo de vida saudável (Healthspan).' },
-  { id: 'MitoxOptimize', label: 'Consultoria de Estilo de Vida Ativo', duration: '60 min', price: 'R$ 500', desc: 'Otimização com foco em biohacking preventivo, saúde mitocondrial, manejo de fadiga e reprogramação de hábitos.' },
-  { id: 'ForensicRegular', label: 'Laudo Pericial de Alto Valor (INSS)', duration: '90 min', price: 'Sob Consulta', desc: 'Análise detalhada, formulação científica de quesitos para incapacidade para buscar a concessão de benefícios previdenciaristas.' },
-  { id: 'IrpfVerify', label: 'Análise Documental para Isenção IRPF', duration: '60 min', price: 'R$ 750', desc: 'Investigação clínica histórica e confecção de parecer irrefutável para subsidiar pedidos de isenção fiscal por moléstias graves.' }
+  { id: 'MedicalConsult', label: 'Consulta médica', duration: '60 min', price: 'Sob consulta', desc: 'Avaliação clínica individual com definição de conduta e necessidade de acompanhamento conforme o caso.' },
+  { id: 'ForensicMeeting', label: 'Reunião médico-pericial', duration: '90 min', price: 'Sob consulta', desc: 'Alinhamento técnico sobre objeto pericial, documentação disponível, quesitos e limites da análise médica.' },
+  { id: 'DocumentReview', label: 'Análise documental médico-legal', duration: '60 min', price: 'Sob consulta', desc: 'Revisão inicial de documentação para delimitar escopo, fontes relevantes e próximos passos técnicos.' }
 ];
 
 const renderServiceIcon = (id: string) => {
   switch (id) {
-    case 'LongevityCell':
+    case 'MedicalConsult':
       return <Sparkles className="text-[#B5A475]" size={22} />;
-    case 'MitoxOptimize':
+    case 'DocumentReview':
       return <Stethoscope className="text-[#B5A475]" size={22} />;
-    case 'ForensicRegular':
+    case 'ForensicMeeting':
       return <Scale className="text-[#B5A475]" size={22} />;
-    case 'IrpfVerify':
+    case 'DocumentReview':
       return <Briefcase className="text-[#B5A475]" size={22} />;
     default:
       return <Sparkles className="text-[#B5A475]" size={22} />;
@@ -106,7 +105,7 @@ export const BookingCalendar: React.FC<BookingCalendarProps> = ({ user, accessTo
         // Enforce ISO format with timezone (America/Sao_Paulo is GMT-3)
         const startISO = `${appointmentDateTime}-03:00`;
         // Calculate end date based on duration
-        const durationMin = selectedType.id === 'ForensicRegular' ? 90 : selectedType.id === 'LongevityCell' ? 75 : 60;
+        const durationMin = selectedType.id === 'ForensicMeeting' ? 90 : 60;
         const [hour, min] = selectedTime.split(':');
         let endHour = parseInt(hour, 10);
         let endMin = parseInt(min, 10) + durationMin;
@@ -121,7 +120,7 @@ export const BookingCalendar: React.FC<BookingCalendarProps> = ({ user, accessTo
         const calendarEventBody = {
           summary: `Dra. Joyce Radis: Consulta (${selectedType.label})`,
           location: 'Consultório Dra. Joyce Radis / Online',
-          description: `Paciente: ${patientName}\nServiço: ${selectedType.label}\nNotas: ${notes || 'Sem observações'}\nConfirmado via Plataforma Premium de Perícia & Medicina.`,
+          description: `Paciente: ${patientName}\nServiço: ${selectedType.label}\nNotas: ${notes || 'Sem observações'}\nSolicitado via plataforma profissional da Dra. Joyce Radis.`,
           start: {
             dateTime: startISO,
             timeZone: 'America/Sao_Paulo'
@@ -195,10 +194,10 @@ export const BookingCalendar: React.FC<BookingCalendarProps> = ({ user, accessTo
       {/* Services and Booking Form */}
       <div className="lg:col-span-8 bg-white border border-stone-150 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
         <div>
-          <span className="text-[10px] uppercase font-black tracking-widest text-[#B5A475]">Agendamento Presencial ou Telemedicina</span>
-          <h3 className="font-serif text-2xl md:text-3xl text-stone-900 font-bold mt-1">Conecte-se Clinicamente</h3>
+          <span className="text-[10px] uppercase font-black tracking-widest text-[#B5A475]">Solicitação de agendamento</span>
+          <h3 className="font-serif text-2xl md:text-3xl text-stone-900 font-bold mt-1">Agenda profissional</h3>
           <p className="text-stone-500 text-xs mt-1">
-            Escolha o modelo de serviço adequado. Seus agendamentos serão sincronizados diretamente na conta do Google.
+            Escolha o tipo de atendimento ou reunião. A disponibilidade e o escopo são confirmados conforme o caso.
           </p>
         </div>
 
