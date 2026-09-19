@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, MessageSquare, Send, ExternalLink, RefreshCw, AlertCircle, FilePlus, Table, PlusSquare } from 'lucide-react';
 import { getAccessToken, initAuth, googleSignIn } from '../firebase';
-import { PerformanceCharts } from './PerformanceCharts';
 
 export const WorkspaceHub: React.FC = () => {
   const [needsAuth, setNeedsAuth] = useState(false);
@@ -284,8 +283,6 @@ export const WorkspaceHub: React.FC = () => {
         </div>
       )}
 
-      {/* SEÇÃO DE MÉTRICAS E INDICADORES (RECHARTS) */}
-      <PerformanceCharts />
     </div>
   );
 };
