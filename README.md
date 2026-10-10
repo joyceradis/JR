@@ -2,13 +2,13 @@
 
 Source code for the professional website of **Dra. Joyce Radis**, physician (CRM-ES 21188), with work in emergency and acute care, court-appointed medical expertise, and clinical/medico-legal software projects.
 
-## Relationship to the project ecosystem
+## Project identity and boundaries
 
-**JR is the public professional website**, published independently of the personal Radis workspace. The [GitHub profile](https://github.com/joyceradis) is the public technical portfolio; the public clinical, medico-legal and educational repositories remain separate products.
+**Category:** public professional website and presentation layer, separate from the personal Radis workspace and from independently developed commercial or clinical products.
 
-**Boundary:** the private Radis experience is not implemented by this site. There is no need to duplicate its code, internal dashboards, exam results or unpublished integrations here.
+The public [GitHub profile](https://github.com/joyceradis) provides a technical portfolio. Each application has its own audience, roadmap and repository; being listed in a portfolio does **not** imply that the applications are merged into Radis.
 
-**Traceability:** [README commit history](https://github.com/joyceradis/JR/commits/main/README.md) · [repository pull requests](https://github.com/joyceradis/JR/pulls?q=is%3Apr). Cite the originating PR where verifiable; otherwise rely on commit history rather than inventing an origin.
+**Traceability:** [README commit history](https://github.com/joyceradis/JR/commits/main/README.md) · [pull requests](https://github.com/joyceradis/JR/pulls?q=is%3Apr). Use a specific originating PR only when verified.
 
 ## Public technical profile
 
