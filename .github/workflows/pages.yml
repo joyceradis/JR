@@ -1,0 +1,157 @@
+name: Site profissional · build e GitHub Pages
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/pages.yml"
+      - "App.tsx"
+      - "index.html"
+      - "index.css"
+      - "index.tsx"
+      - "components/**"
+      - "src/**"
+      - "firebase.ts"
+      - "firebase-applet-config.json"
+      - "package.json"
+      - "package-lock.json"
+      - "vite.config.ts"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/pages.yml"
+      - "App.tsx"
+      - "index.html"
+      - "index.css"
+      - "index.tsx"
+      - "components/**"
+      - "src/**"
+      - "firebase.ts"
+      - "firebase-applet-config.json"
+      - "package.json"
+      - "package-lock.json"
+      - "vite.config.ts"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-profissional-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Compilar e validar frontend
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Instalar dependências verificáveis
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run lint
+
+      - name: Compilar frontend e servidor
+        run: npm run build
+
+      - name: Preparar artifact estático para Pages
+        run: |
+          test -s dist/index.html
+          test -d dist/assets
+          test -s CNAME
+          cp CNAME dist/CNAME
+          if grep -qE 'src="/index.tsx"|href="/index.css"' dist/index.html; then
+            echo "ERROR: A página não está compilada pelo Vite."; exit 1
+          fi
+          if [ -f dist/.env ]; then
+            echo "ERROR: Arquivo .env não pode ir para GitHub Pages."; exit 1
+          fi
+          echo "CNAME preparado: $(cat dist/CNAME)"
+          echo "Bundle compilado. Observação: endpoints Express em server.ts não são hospedados pelo GitHub Pages."
+
+      - name: Diagnóstico externo do endereço (somente leitura)
+        run: |
+          for url in https://drajoyceradis.com/ https://www.drajoyceradis.com/ https://joyceradis.github.io/JR/; do
+            echo "Check: $url"
+            curl --max-time 12 --location --silent --show-error \
+              --output /dev/null --write-out 'HTTP=%{http_code} IP=%{remote_ip} redirect=%{url_effective} TLS_verify=%{ssl_verify_result}\n' \
+              "$url" || true
+          done
+
+      - name: Instalar navegador de testes
+        run: |
+          npm install --no-save --no-package-lock --no-audit --no-fund playwright@1.55.1
+          npx playwright install --with-deps chromium
+
+      - name: Smoke test do frontend estático no navegador
+        run: |
+          python3 -m http.server 4174 --bind 127.0.0.1 --directory dist >/tmp/jr-preview.log 2>&1 &
+          srv=$!
+          trap 'kill "$srv" || true' EXIT
+          sleep 2
+          node --input-type=module <<'JS'
+          import { chromium } from 'playwright';
+          import assert from 'node:assert/strict';
+          import { mkdirSync } from 'node:fs';
+          mkdirSync('review-site',{recursive:true});
+          const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+          const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:1});
+          const errors=[];
+          page.on('pageerror',e=>errors.push(e.message));
+          try {
+            const response=await page.goto('http://127.0.0.1:4174/',{waitUntil:'domcontentloaded'});
+            assert.equal(response.status(),200);
+            await page.waitForTimeout(2200);
+            assert.ok(await page.locator('#root > *').count()>0, 'O React deve renderizar conteúdo no #root');
+            assert.ok((await page.locator('body').innerText()).length>70,'Corpo não pode estar vazio');
+            await page.screenshot({path:'review-site/home-mobile.png',fullPage:false});
+            console.log('Errors observed in browser:', errors);
+            assert.equal(errors.length,0,'Erros JavaScript impedem publicação');
+            console.log('PASS: build Vite renderiza o frontend no navegador.');
+          } finally { await browser.close(); }
+          JS
+
+      - name: Captura para revisão
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jr-verificacao-frontend
+          path: review-site/
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Configurar GitHub Pages para build validado
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v5
+
+      - name: Empacotar saída construída (nunca a raiz do repositório)
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    name: Publicar frontend do site profissional
+    if: github.event_name != 'pull_request'
+    needs: verify
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - id: deployment
+        name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
